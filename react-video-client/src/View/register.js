@@ -5,16 +5,24 @@ import Nav from '../Component/nav'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {Link} from "react-router-dom"
+import Axios from "axios";
 
-const Register = () => {
+const Register = (props) => {
 
 
 
     const register = (event) => {
-        const image = document.getElementById('formBasicProfile').filesé;
-        console.log(image);
+        const email = document.getElementById('formBasicEmail').value;
+        const password = document.getElementById('formBasicPassword').value;
+        const passwordTwo = document.getElementById('formBasicPasswordTwo').value;
+        Axios.post('http://localhost:3001/register', {
+            email: `${email}`,
+            password: `${password}`,
+            passwordTwo: `${passwordTwo}`
+        }).then(res => {
+            console.log(res)
+        }).catch(err => console.log(err));
         event.preventDefault();
-
     };
         return (
             <div className="App">

@@ -17,22 +17,25 @@ router.get('/',function (req,res,next) {
 
 router.post('/',function(req, res, next){
     console.log(req.body);
-    if ( req.body.Email === ''|| req.body.Password === '' || req.body.PasswordTwo === '' || req.body.Password !== req.body.PasswordTwo) {
-        console.log('no valid');
-        res.redirect('http://localhost:3000/register')
+    if ( req.body.email === ''|| req.body.password === '' || req.body.passwordTwo === '' || req.body.password !== req.body.passwordTwo) {
+        res.setHeader('Content-Type', 'application/json');
+
+        res.send('no valid');
     }else {
         mariadb.createConnection({host: '127.0.0.1',database: 'netflix_db' , user: 'root', password: 'root'})
             .then(conn => {
-                conn.query(`INSERT INTO klant(email, klant_password, profile_image ) VALUES('${req.body.Email}', '${hashPass.generate(req.body.Password)}', '${req.body.profilePic}' )`, [2]);
-                        console.log("success");
-                        conn.end();
+               if (req.body.password === req.body.passwordTwo) {
+                   res.setHeader('Content-Type', 'application/json');
+
+                   conn.query(`INSERT INTO klant(email, klant_password) VALUES('${req.body.email}', '${hashPass.generate(req.body.password)}')`, [2]);
+                   res.send('o hallo there');
+               }
+                conn.end();
             })
             .catch(err => {
                 //handle connection error
                 console.log(err);
             });
-
-        res.redirect('http://localhost:3000/login')
     }
 });
 
