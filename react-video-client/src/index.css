@@ -1,0 +1,28 @@
+.Card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 5%;
+}
+
+.cardItems {
+}
+
+input {
+  max-width: 200px;
+}
+a {
+  color: lightslategray !important;
+  text-decoration: none !important;
+}a:hover {
+   color: lightslategray !important;
+   text-decoration: none !important;
+ }
+.page-nav {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  padding: 2%;
+}
+
