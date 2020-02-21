@@ -11,7 +11,7 @@ import Axios from "axios";
 const Home = (props) => {
     const [movie, setMovie] = useState([]);
 
-    // Key variable need te be your own key if you want to use this
+    // Key must be set in apiKey.js with your own key
     let url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${Key}&language=en-US&page=${props.countHome}`;
 
 
@@ -22,10 +22,6 @@ const Home = (props) => {
     useEffect(() => {
         Axios.get(url).then(json => setMovie(json.data.results))
     }, [url]);
-
-    useEffect(() => {
-        Axios.get("http://localhost:3001/users").then(json => console.log(json))
-    });
 
     return (
         <div className="App">

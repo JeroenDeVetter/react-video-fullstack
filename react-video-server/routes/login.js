@@ -19,16 +19,29 @@ router.post('/',function(req, res, next) {
     mariadb.createConnection({host: '127.0.0.1', database: 'netflix_db', user: 'root', password: 'root'})
         .then(conn => {
             console.log(typeof req.body.email);
-            conn.query(`SELECT * FROM klant where email = '${req.body.email}' `, [2])
+            conn.query(`SELECT client_email, client_password, client_firstName, client_lastName FROM client where client_email = '${req.body.email}' `, [2])
                 .then((rows) => {
                     res.setHeader('Content-Type', 'application/json');
-                    if (hash.verify(req.body.password, rows[0]['klant_password'])) {
-                        res.json({user: rows, status: true});
+                    if (hash.verify(req.body.password, rows[0]['client_password'])) {
+                        res.json([{
+                            email: rows[0]['client_email'],
+                            firstName: rows[0]['client_firstName'],
+                            lastName: rows[0]['client_lastName'],
+                            status: true}
+                            ]);
                     }else {
-                        res.json({user : 'not correct', status: false});
+                        res.json([{
+                            user : 'not correct',
+                            status: 'false'
+                        }]);
                     }
                 }).then(() => {
                 conn.end()
+            }).catch(err => {
+                res.json([{
+                    user : 'no user is found with this email address',
+                    status : 'noFound'
+                }])
             })
         })
 });

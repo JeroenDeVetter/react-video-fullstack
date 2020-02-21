@@ -7,10 +7,21 @@
   pointer-events: none;
 }
 
+.logout {
+  margin-top: 2% ;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.close {
+  top: 17px;
+  position: absolute;
+  right: 25px;
+
 }
 
 .form-group {

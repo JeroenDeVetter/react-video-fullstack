@@ -16,14 +16,17 @@ const App = () => {
   const [Search, setSearch] = useState();
   const [MovieName, setMovieName] = useState();
   const [users, setUsers] = useState([]);
- console.log('o hallo there');
+  const [display,setDisplay] = useState('none');
+  const [message,setMessage] = useState('');
+  const [variant,setVariant] = useState('');
+  const [logout, setLogout] = useState('none');
   return (
       <Router>
         <Switch>
           <Route exact path="/" component={() => <Home Search={Search} setMovieName={setMovieName} setSearch={setSearch} countHome={countHome} setCount={setCountHome} setMovieID={setMovieId}/>}/>
           <Route path="/movie" component={() => <MovieDis movieName={MovieName} movieId={movieId}/>}/>
-          <Route path="/login" component={() => <Login users={users} setUsers={setUsers}/>}/>
-          <Route path="/register" component={() => <Register/>}/>
+          <Route path="/login" component={() => <Login logout={logout} setLogout={setLogout} variant={variant} setVariant={setVariant} users={users} message={message} setMassage={setMessage} display={display} setDisplay={setDisplay} setUsers={setUsers}/>}/>
+          <Route path="/register" component={() => <Register display={display} setDisplay={setDisplay} variant={variant} setVariant={setVariant} message={message} setMassage={setMessage}/>}/>
         </Switch>
       </Router>
   )

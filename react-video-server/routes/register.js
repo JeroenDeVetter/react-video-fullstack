@@ -26,9 +26,8 @@ router.post('/',function(req, res, next){
             .then(conn => {
                if (req.body.password === req.body.passwordTwo) {
                    res.setHeader('Content-Type', 'application/json');
-
-                   conn.query(`INSERT INTO klant(email, klant_password) VALUES('${req.body.email}', '${hashPass.generate(req.body.password)}')`, [2]);
-                   res.send('o hallo there');
+                   conn.query(`INSERT INTO client(client_email, client_password, client_firstName, client_lastName) VALUES('${req.body.email}', '${hashPass.generate(req.body.password)}', '${req.body.firstname}', '${req.body.lastname}')`, [2]);
+                   res.send('Welcome to the movie club');
                }
                 conn.end();
             })
