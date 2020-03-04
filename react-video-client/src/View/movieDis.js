@@ -19,7 +19,6 @@ const MovieDis = (props) => {
     useEffect(() => {
         Axios.get(url2).then(json => setCast(json.data.cast))
     }, [url2]);
-
      let key = "";
      loop :  for (let i = 0; i < trailerKey.length; i++) {
          let name = trailerKey[i].name.toLowerCase().split(" ");

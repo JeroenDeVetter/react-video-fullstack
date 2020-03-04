@@ -2,15 +2,15 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import NoImg from "../img/noimg.jpg";
 
-
+let gender = "";
 const credit = (props) => {
-    let gender = "";
-    if (props.gender === 0) {
-        gender = "Unspecified";
+
+    if (props.gender === 2) {
+        gender = "Male";
     }if(props.gender === 1) {
         gender = "Female";
-    }else {
-        gender = "Male"
+    }if(props.gender === 0) {
+        gender = "Unspecified"
     }
     let img  = '';
 

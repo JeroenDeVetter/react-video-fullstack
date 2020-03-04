@@ -16,11 +16,13 @@ router.get('/',function (req,res,next) {
 });
 
 router.post('/',function(req, res, next) {
+    console.log(req.body);
     mariadb.createConnection({host: '127.0.0.1', database: 'netflix_db', user: 'root', password: 'root'})
         .then(conn => {
             console.log(typeof req.body.email);
             conn.query(`SELECT client_email, client_password, client_firstName, client_lastName FROM client where client_email = '${req.body.email}' `, [2])
                 .then((rows) => {
+                    console.log(rows[0])
                     res.setHeader('Content-Type', 'application/json');
                     if (hash.verify(req.body.password, rows[0]['client_password'])) {
                         res.json([{

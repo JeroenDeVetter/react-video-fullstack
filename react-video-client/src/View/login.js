@@ -17,6 +17,7 @@ const Login = (props) => {
             email: `${email}`,
             password: `${password}`,
         }).then(res => {
+            console.log(res)
             props.setUsers(res.data[0]);
             if (res.data[0].status === true) {
                 props.setDisplay('block');
